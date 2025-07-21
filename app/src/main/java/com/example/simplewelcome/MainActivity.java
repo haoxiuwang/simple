@@ -3,8 +3,11 @@ package com.example.simplewelcome;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-public class MainActivity extends Activity {
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
     private WebServer server;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +18,20 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setContentView(R.layout.activity_main);
+       
+// 加载 WebView
+        WebView webView = new WebView(this);
+        webView.setWebViewClient(new WebViewClient());
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setAllowFileAccess(true);
+        settings.setAllowContentAccess(true);
+        setContentView(webView);
+        // 加载本地服务器内容
+        webView.loadUrl("http://127.0.0.1:8080/");
+
+        // setContentView(R.layout.activity_main);
     }
     @Override
     protected void onDestroy() {

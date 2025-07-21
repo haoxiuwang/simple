@@ -3,6 +3,7 @@
     package="com.example.simplewelcome">
 
     <application
+        android:usesCleartextTraffic="true"
         android:label="WelcomeApp"
         android:theme="@android:style/Theme.Material.Light">
         <activity
