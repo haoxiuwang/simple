@@ -1,7 +1,4 @@
-<style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- 隐藏状态栏 -->
-    <item name="android:windowFullscreen">true</item>
-    <!-- 隐藏导航栏（虚拟按键栏） -->
-    <item name="android:windowTranslucentNavigation">true</item>
-    <item name="android:navigationBarColor">@android:color/transparent</item>
+<style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- 保持主题无ActionBar -->
+    <!-- 不设置 windowNoTitle，NoActionBar 已经去掉标题栏 -->
 </style>
