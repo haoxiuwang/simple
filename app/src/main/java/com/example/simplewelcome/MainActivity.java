@@ -75,7 +75,7 @@ try {
         overlay.setBackgroundColor(0xFF000000); // 黑色不透明
         overlay.setAlpha(1f); // 确保遮罩初始为全不透明
 overlay.setVisibility(View.VISIBLE); // 显示遮罩
-
+rootLayout.addView(overlay, webParams);
 overlay.postDelayed(new Runnable() {
     @Override
     public void run() {
@@ -91,7 +91,7 @@ overlay.postDelayed(new Runnable() {
     }
 }, 2000); // 延迟 1000 毫秒（1秒）开始动画
 
-rootLayout.addView(overlay, webParams);
+
     } catch (Exception e) {
         e.printStackTrace();
         Toast.makeText(this, "WebView 初始化失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
