@@ -40,7 +40,7 @@ jobs:
 
       # 12. 授权 gradlew 执行权限
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x gradlew
 
       # 13. 构建 APK，./gradlew assembleRelease
       - name: Build APK with Gradle
