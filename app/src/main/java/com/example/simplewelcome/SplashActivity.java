@@ -1,4 +1,4 @@
-package com.example.simplewelcome;
+package dev.simplesolution.one;
 
 import android.content.Intent;
 import android.os.Bundle;
