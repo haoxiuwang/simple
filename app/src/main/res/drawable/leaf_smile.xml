@@ -21,7 +21,7 @@
 
     <!-- 微笑 -->
     <path
-        android:fillColor="none"
+        android:fillColor="@android:color/transparent"
         android:strokeColor="#000000"
         android:strokeWidth="3"
         android:pathData="M85,80 Q100,95 115,80" />
