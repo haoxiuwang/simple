@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import android.graphics.Color;
+import android.view.ViewGroup;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -24,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
             if (frameIndex < frames.length) {
                 imageView.setImageResource(frames[frameIndex]);
                 frameIndex++;
-                handler.postDelayed(this, 300); // 每帧 300ms
+                handler.postDelayed(this, 1000); // 每帧 300ms
             } else {
                 // 动画完成，进入主界面
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -38,7 +40,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         imageView = new ImageView(this);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageView.setBackgroundColor(Color.BLACK);
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        ));
         setContentView(imageView);
 
         handler.post(frameRunnable);
