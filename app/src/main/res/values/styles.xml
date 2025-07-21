@@ -1,8 +1,8 @@
 <!-- 基础主题继承自 Theme.AppCompat -->
 <style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- 隐藏状态栏 -->
-    <item name="windowNoTitle">true</item>
-    <item name="windowActionBar">false</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
     <item name="android:windowFullscreen">true</item>
     <!-- 隐藏导航栏（虚拟按键栏） -->
     <item name="android:windowTranslucentNavigation">true</item>
