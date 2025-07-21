@@ -5,7 +5,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:label="WelcomeApp"
-        android:theme="@style/AppTheme.FullScreen"
+        android:theme="@style/AppTheme.FullScreen">
         <activity
             android:name=".MainActivity"
             android:exported="true">
