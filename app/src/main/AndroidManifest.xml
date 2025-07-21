@@ -5,6 +5,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:label="单田芳"
+        android:icon="@drawable/leaf_smile"
         android:theme="@style/AppTheme.FullScreen">
         <activity
             android:name=".MainActivity"
