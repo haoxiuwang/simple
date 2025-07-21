@@ -1,5 +1,5 @@
 
-package com.example.simplewelcome;
+package dev.simplesolution.one;
 
 import android.app.Activity;
 import android.os.Bundle;

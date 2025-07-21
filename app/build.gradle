@@ -9,11 +9,11 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    namespace 'com.example.simplewelcome'
+    namespace 'dev.simplesolution.one'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.simplewelcome"
+        applicationId "dev.simplesolution.one"
         minSdk 21
         targetSdk 33
         versionCode 1

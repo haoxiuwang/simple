@@ -1,6 +1,6 @@
 // 文件路径：app/src/main/java/whx/apps/youtube/LocalWebServer.java
 // 文件名必须与类名一致
-package com.example.simplewelcome;
+package dev.simplesolution.one;
 
 import android.content.Context;
 import fi.iki.elonen.NanoHTTPD;
