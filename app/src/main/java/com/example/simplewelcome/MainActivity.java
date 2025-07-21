@@ -90,7 +90,7 @@ overlay.postDelayed(new Runnable() {
         });
         fadeOut.start();
     }
-}, 2000); // 延迟 1000 毫秒（1秒）开始动画
+}, 1000); // 延迟 1000 毫秒（1秒）开始动画
 
 
     } catch (Exception e) {
