@@ -1,4 +1,5 @@
-<style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- 保持主题无ActionBar -->
-    <!-- 不设置 windowNoTitle，NoActionBar 已经去掉标题栏 -->
-</style>
+<resources>
+    <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+    
+    </style>
+</resources>

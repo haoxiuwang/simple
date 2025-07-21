@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
+import android.view.View;
 public class MainActivity extends AppCompatActivity {
     private WebServer server;
     @Override
@@ -20,6 +21,16 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
        
+// 沉浸式全屏，隐藏状态栏和导航栏
+        getWindow().getDecorView().setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION     // hide nav bar
+            | View.SYSTEM_UI_FLAG_FULLSCREEN          // hide status bar
+            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+
 try {
         WebView webView = new WebView(this);
 
@@ -55,6 +66,23 @@ try {
     }
         // setContentView(R.layout.activity_main);
     }
+
+
+
+    @Override
+public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+        getWindow().getDecorView().setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+}
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
