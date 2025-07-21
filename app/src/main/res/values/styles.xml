@@ -1,5 +1,8 @@
 <resources>
     <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
-    
+         <item name="android:windowSplashScreenBackground">@color/black</item>
+        <!-- 可选：自定义 Logo -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/leaf_smile</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/black</item>
     </style>
 </resources>
