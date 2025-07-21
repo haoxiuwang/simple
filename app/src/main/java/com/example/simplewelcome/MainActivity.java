@@ -91,6 +91,7 @@ overlay.postDelayed(new Runnable() {
     }
 }, 2000); // 延迟 1000 毫秒（1秒）开始动画
 
+rootLayout.addView(overlay, webParams);
     } catch (Exception e) {
         e.printStackTrace();
         Toast.makeText(this, "WebView 初始化失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
