@@ -73,23 +73,23 @@ try {
         // 创建遮罩层（黑色）
         View overlay = new View(this);
         overlay.setBackgroundColor(0xFF000000); // 黑色不透明
-        overlay.setAlpha(1f); // 完全可见
+        overlay.setAlpha(1f); // 确保遮罩初始为全不透明
+overlay.setVisibility(View.VISIBLE); // 显示遮罩
 
-        rootLayout.addView(overlay, webParams);
-
-        // 设置内容视图
-        setContentView(rootLayout);
-
-        // 渐变动画（1秒淡出）
-        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(overlay, "alpha", 1f, 0f);
-fadeOut.setDuration(1000); // 1秒淡出
-fadeOut.addListener(new AnimatorListenerAdapter() {
+overlay.postDelayed(new Runnable() {
     @Override
-    public void onAnimationEnd(Animator animation) {
-        overlay.setVisibility(View.GONE); // 淡出后彻底移除遮罩的触摸影响
+    public void run() {
+        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(overlay, "alpha", 1f, 0f);
+        fadeOut.setDuration(1000); // 1秒淡出
+        fadeOut.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                overlay.setVisibility(View.GONE); // 动画结束后隐藏遮罩
+            }
+        });
+        fadeOut.start();
     }
-});
-fadeOut.start();
+}, 2000); // 延迟 1000 毫秒（1秒）开始动画
 
     } catch (Exception e) {
         e.printStackTrace();
