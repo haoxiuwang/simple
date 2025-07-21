@@ -8,7 +8,7 @@
         android:icon="@drawable/leaf_smile"
         android:theme="@style/AppTheme.FullScreen">
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -17,7 +17,7 @@
         </activity>
         
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"/>
     </application>
 </manifest>
