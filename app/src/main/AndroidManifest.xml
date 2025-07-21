@@ -5,7 +5,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:label="WelcomeApp"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/FullScreenTheme">
         <activity
             android:name=".MainActivity"
             android:exported="true">
