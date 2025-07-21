@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 import android.view.View;
+import android.animation.ObjectAnimator;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+
 public class MainActivity extends AppCompatActivity {
     private WebServer server;
     @Override
@@ -59,7 +64,33 @@ try {
         webView.loadUrl("http://127.0.0.1:8080/");
 
         // 设置视图
-        setContentView(webView);
+        FrameLayout rootLayout = new FrameLayout(this);
+        FrameLayout.LayoutParams webParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+        );
+        rootLayout.addView(webView, webParams);
+        // 创建遮罩层（黑色）
+        View overlay = new View(this);
+        overlay.setBackgroundColor(0xFF000000); // 黑色不透明
+        overlay.setAlpha(1f); // 完全可见
+
+        rootLayout.addView(overlay, webParams);
+
+        // 设置内容视图
+        setContentView(rootLayout);
+
+        // 渐变动画（1秒淡出）
+        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(overlay, "alpha", 1f, 0f);
+fadeOut.setDuration(1000); // 1秒淡出
+fadeOut.addListener(new AnimatorListenerAdapter() {
+    @Override
+    public void onAnimationEnd(Animator animation) {
+        overlay.setVisibility(View.GONE); // 淡出后彻底移除遮罩的触摸影响
+    }
+});
+fadeOut.start();
+
     } catch (Exception e) {
         e.printStackTrace();
         Toast.makeText(this, "WebView 初始化失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
