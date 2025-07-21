@@ -76,6 +76,7 @@ try {
         overlay.setAlpha(1f); // 确保遮罩初始为全不透明
 overlay.setVisibility(View.VISIBLE); // 显示遮罩
 rootLayout.addView(overlay, webParams);
+setContentView(rootLayout);
 overlay.postDelayed(new Runnable() {
     @Override
     public void run() {
