@@ -6,7 +6,7 @@ import android.content.Context;
 import fi.iki.elonen.NanoHTTPD;
 import java.io.InputStream;
 
-public class WebServer extends NanoHTTPD {
+class WebServer extends NanoHTTPD {
     private final Context context;
 
     public WebServer(Context context, int port) {
