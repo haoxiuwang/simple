@@ -75,14 +75,14 @@ try {
         // 创建遮罩层（黑色）
         // View overlay = new View(this);
         ImageView imageView = new ImageView(this);
-        imageView.setImageResource(R.drawable.frame1)
+        imageView.setImageResource(R.drawable.frame1);
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         imageView.setBackgroundColor(Color.BLACK);
         imageView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
         ));
-        ImageView overlay = imageView
+        ImageView overlay = imageView;
         overlay.setBackgroundColor(0xFF000000); // 黑色不透明
         overlay.setAlpha(1f); // 确保遮罩初始为全不透明
         overlay.setVisibility(View.VISIBLE); // 显示遮罩
