@@ -13,6 +13,8 @@ import android.view.View;
 import android.animation.ObjectAnimator;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     private WebServer server;
@@ -71,25 +73,34 @@ try {
         );
         rootLayout.addView(webView, webParams);
         // 创建遮罩层（黑色）
-        View overlay = new View(this);
+        // View overlay = new View(this);
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.drawable.frame1)
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageView.setBackgroundColor(Color.BLACK);
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        ));
+        ImageView overlay = imageView
         overlay.setBackgroundColor(0xFF000000); // 黑色不透明
         overlay.setAlpha(1f); // 确保遮罩初始为全不透明
-overlay.setVisibility(View.VISIBLE); // 显示遮罩
-rootLayout.addView(overlay, webParams);
-setContentView(rootLayout);
-overlay.postDelayed(new Runnable() {
-    @Override
-    public void run() {
-        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(overlay, "alpha", 1f, 0f);
-        fadeOut.setDuration(1000); // 1秒淡出
-        fadeOut.addListener(new AnimatorListenerAdapter() {
+        overlay.setVisibility(View.VISIBLE); // 显示遮罩
+        rootLayout.addView(overlay, webParams);
+        setContentView(rootLayout);
+        overlay.postDelayed(new Runnable() {
             @Override
-            public void onAnimationEnd(Animator animation) {
-                overlay.setVisibility(View.GONE); // 动画结束后隐藏遮罩
+            public void run() {
+                ObjectAnimator fadeOut = ObjectAnimator.ofFloat(overlay, "alpha", 1f, 0f);
+                fadeOut.setDuration(1000); // 1秒淡出
+                fadeOut.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        overlay.setVisibility(View.GONE); // 动画结束后隐藏遮罩
+                    }
+                });
+                fadeOut.start();
             }
-        });
-        fadeOut.start();
-    }
 }, 1000); // 延迟 1000 毫秒（1秒）开始动画
 
 
