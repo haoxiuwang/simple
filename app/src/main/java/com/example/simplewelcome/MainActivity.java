@@ -15,6 +15,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.graphics.Color;
 
 public class MainActivity extends AppCompatActivity {
     private WebServer server;
