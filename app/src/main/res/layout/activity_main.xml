@@ -14,14 +14,17 @@
         android:id="@+id/overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:background="#000000ff">
 
         <!-- 遮罩层中的图片 -->
         <ImageView
             android:id="@+id/overlayImage"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:maxWidth="70%parent"
             android:src="@drawable/cover" />
             <!-- 请替换 your_image 为你实际的图片资源 -->
     </FrameLayout>
