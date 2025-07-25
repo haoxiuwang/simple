@@ -24,7 +24,11 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:maxWidth="70%parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.7"
             android:src="@drawable/cover" />
             <!-- 请替换 your_image 为你实际的图片资源 -->
     </FrameLayout>
