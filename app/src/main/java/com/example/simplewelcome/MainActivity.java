@@ -41,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 try {
-        WebView webView = new WebView(this);
+        setContentView(R.layout.activity_main);
 
+        // 初始化视图
+        webView = findViewById(R.id.webView);
+        overlay = findViewById(R.id.overlay);
+
+        // 配置WebView
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -67,62 +72,29 @@ try {
         // 加载本地网页
         webView.loadUrl("http://127.0.0.1:8080/");
 
-        // 设置视图
-        FrameLayout rootLayout = new FrameLayout(this);
-        FrameLayout.LayoutParams webParams = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-        );
-        rootLayout.addView(webView, webParams);
-        // 创建遮罩层（黑色）
-        // View overlay = new View(this);
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(R.drawable.cover);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        imageView.setBackgroundColor(Color.BLACK);
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-        ));
-        FrameLayout overlay = new FrameLayout(this);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.gravity = Gravity.CENTER;
-        overlay.setBackgroundColor(Color.BLACK);
-        overlay.addView(imageView, params);
-        overlay.setBackgroundColor(0xFF000000); // 黑色不透明
-        overlay.setAlpha(1f); // 确保遮罩初始为全不透明
-        overlay.setVisibility(View.VISIBLE); // 显示遮罩
-        rootLayout.addView(overlay, webParams);
-        setContentView(rootLayout);
-        overlay.postDelayed(new Runnable() {
+        // 2秒后渐隐遮罩层
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ObjectAnimator fadeOut = ObjectAnimator.ofFloat(overlay, "alpha", 1f, 0f);
-                fadeOut.setDuration(1000); // 1秒淡出
-                fadeOut.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        overlay.setVisibility(View.GONE); // 动画结束后隐藏遮罩
-                    }
-                });
-                fadeOut.start();
+                overlay.animate()
+                    .alpha(0f)
+                    .setDuration(1000) // 1秒渐隐动画
+                    .withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            overlay.setVisibility(View.GONE); // 动画完成后完全隐藏
+                        }
+                    })
+                    .start();
             }
-}, 1000); // 延迟 1000 毫秒（1秒）开始动画
-
+        }, 2000); // 延迟2秒执行
 
     } catch (Exception e) {
         e.printStackTrace();
         Toast.makeText(this, "WebView 初始化失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
     }
-        // setContentView(R.layout.activity_main);
-    }
-
-
-
-    @Override
+    
+@Override
 public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
