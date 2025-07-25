@@ -19,6 +19,8 @@ import android.graphics.Color;
 
 public class MainActivity extends AppCompatActivity {
     private WebServer server;
+    private WebView webView;
+    private FrameLayout overlay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
