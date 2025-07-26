@@ -74,7 +74,7 @@ try {
         // 加载本地网页
         webView.loadUrl("http://127.0.0.1:8080/");
 
-        final View overlay = findViewById(R.id.overlay);
+
 overlay.setAlpha(0f); // 初始透明
 
 // 渐显动画
