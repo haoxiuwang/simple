@@ -70,7 +70,7 @@ try {
         settings.setDomStorageEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
-
+        webView.setWebChromeClient(new WebChromeClient());
         // 加载本地网页
         webView.loadUrl("http://192.168.1.104:3000/");
 
