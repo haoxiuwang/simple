@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.graphics.Color;
 import android.os.Handler;
+import android.webkit.WebChromeClient;
+
 
 public class MainActivity extends AppCompatActivity {
     private WebServer server;
