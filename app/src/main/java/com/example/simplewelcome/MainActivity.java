@@ -74,22 +74,36 @@ try {
         // 加载本地网页
         webView.loadUrl("http://127.0.0.1:8080/");
 
-        // 2秒后渐隐遮罩层
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                overlay.animate()
-                    .alpha(0f)
-                    .setDuration(1000) // 1秒渐隐动画
-                    .withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            overlay.setVisibility(View.GONE); // 动画完成后完全隐藏
-                        }
-                    })
-                    .start();
-            }
-        }, 2000); // 延迟2秒执行
+        final View overlay = findViewById(R.id.overlay);
+overlay.setAlpha(0f); // 初始透明
+
+// 渐显动画
+overlay.animate()
+    .alpha(1f)
+    .setDuration(1000) // 1秒渐显
+    .withEndAction(new Runnable() {
+        @Override
+        public void run() {
+            // 渐显结束后延迟 2 秒执行渐隐
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    overlay.animate()
+                        .alpha(0f)
+                        .setDuration(1000) // 1秒渐隐
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                overlay.setVisibility(View.GONE); // 隐藏视图
+                            }
+                        })
+                        .start();
+                }
+            }, 2000); // 停留 2 秒后再渐隐
+        }
+    })
+    .start();
+
 
     } catch (Exception e) {
         e.printStackTrace();
