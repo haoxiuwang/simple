@@ -74,7 +74,7 @@ try {
         settings.setAllowContentAccess(true);
         webView.setWebChromeClient(new WebChromeClient());
         // 加载本地网页
-        webView.loadUrl("http://192.168.1.104:3000/");
+        webView.loadUrl("http://127.0.0.1:8080/");
 
 
 overlay.setAlpha(0f); // 初始透明
