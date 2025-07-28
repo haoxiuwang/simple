@@ -125,7 +125,14 @@ public void onWindowFocusChanged(boolean hasFocus) {
             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 }
-
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack(); // 如果WebView有历史记录，则后退
+        } else {
+            super.onBackPressed(); // 否则执行系统默认行为
+        }
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
