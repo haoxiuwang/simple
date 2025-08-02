@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <input multiple type="file" accept=".srt,.json,.webm,.jpg" onchange="load(this)"/>
+    <input multiple type="file" onchange="load(this)"/>
     <audio controls id="audio" />
     <script>
         function load(self) {
