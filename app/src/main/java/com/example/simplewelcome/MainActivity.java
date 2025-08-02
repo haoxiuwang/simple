@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private FrameLayout overlay;
     private ValueCallback<Uri[]> mFilePathCallback;
+    private static final int FILE_CHOOSER_REQUEST_CODE = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,7 @@ try {
             public boolean onShowFileChooser(
                 WebView webView, 
                 ValueCallback<Uri[]> filePathCallback,
-                FileChooserParams fileChooserParams) {
+                WebChromeClient.FileChooserParams fileChooserParams) {
 
                 // 保留 filePathCallback，用于后续返回用户选择的文件
                 mFilePathCallback = filePathCallback;
