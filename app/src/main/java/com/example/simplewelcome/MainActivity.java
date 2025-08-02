@@ -157,28 +157,53 @@ overlay.animate()
     }
 }   
 
+// @Override
+// protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//     if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
+//         if (mFilePathCallback != null) {
+//             Uri[] results = null;
+//             // 如果操作成功并有返回数据
+//             if (resultCode == Activity.RESULT_OK) {
+//                 if (data != null) {
+//                     String dataString = data.getDataString();
+//                     if (dataString != null) {
+//                         results = new Uri[]{ Uri.parse(dataString) };
+//                     }
+//                 }
+//             }
+//             mFilePathCallback.onReceiveValue(results);
+//             mFilePathCallback = null;
+//         }
+//     } else {
+//         super.onActivityResult(requestCode, resultCode, data);
+//     }
+// }
+
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
-        if (mFilePathCallback != null) {
-            Uri[] results = null;
-            // 如果操作成功并有返回数据
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    String dataString = data.getDataString();
-                    if (dataString != null) {
-                        results = new Uri[]{ Uri.parse(dataString) };
+    if (requestCode == FILE_CHOOSER_REQUEST_CODE && mFilePathCallback != null) {
+        Uri[] results = null;
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+                    results = new Uri[count];
+                    for (int i = 0; i < count; i++) {
+                        results[i] = data.getClipData().getItemAt(i).getUri();
                     }
+                } else if (data.getData() != null) {
+                    results = new Uri[]{data.getData()};
                 }
             }
-            mFilePathCallback.onReceiveValue(results);
-            mFilePathCallback = null;
         }
+
+        mFilePathCallback.onReceiveValue(results);
+        mFilePathCallback = null;
     } else {
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
-
 
 @Override
 public void onWindowFocusChanged(boolean hasFocus) {
