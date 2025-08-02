@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private WebServer server;
     private WebView webView;
     private FrameLayout overlay;
+    private ValueCallback<Uri[]> mFilePathCallback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
