@@ -26,6 +26,8 @@ import android.webkit.WebChromeClient;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
 
@@ -35,9 +37,29 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout overlay;
     private ValueCallback<Uri[]> mFilePathCallback;
     private static final int FILE_CHOOSER_REQUEST_CODE = 1001;
+    
+    private void checkStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    Toast.makeText(this, "应用需要访问存储来选择文件", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "应用没有读取权限，正在申请读取权限", Toast.LENGTH_SHORT).show();
+                }
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1001);
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkStoragePermission(); 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "没有读取权限，正在请求权限", Toast.LENGTH_SHORT).show();
