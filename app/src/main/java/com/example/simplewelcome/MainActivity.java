@@ -28,9 +28,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import android.webkit.JsResult;
-import android.app.AlertDialog;
-import android.content.Context;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -112,21 +110,8 @@ try {
 });
 
 webView.setWebChromeClient(new WebChromeClient() {
-    webView.setWebChromeClient(new WebChromeClient() {
-    @Override
-    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-        new AlertDialog.Builder(MainActivity.this)
-            .setTitle("提示")
-            .setMessage(message)
-            .setPositiveButton("确定", (dialog, which) -> {
-                result.confirm();
-            })
-            .setCancelable(false)
-            .show();
-        return true;
-    }
-
-
+    
+    
     @Override
     public boolean onShowFileChooser(WebView webView,
                                      ValueCallback<Uri[]> filePathCallback,
@@ -141,6 +126,17 @@ webView.setWebChromeClient(new WebChromeClient() {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+        new AlertDialog.Builder(MainActivity.this)
+            .setTitle("提示")
+            .setMessage(message)
+            .setPositiveButton("确定", (dialog, which) -> result.confirm())
+            .setCancelable(false)
+            .show();
+        return true; // 表示我们已经处理了这个弹窗
     }
 });
 
