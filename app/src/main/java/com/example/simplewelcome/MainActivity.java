@@ -78,19 +78,17 @@ try {
 webView.setWebChromeClient(new WebChromeClient() {
     
     
+
     @Override
     public boolean onShowFileChooser(WebView webView,
                                     ValueCallback<Uri[]> filePathCallback,
-                                    FileChooserParams fileChooserParams) {
+                                    WebChromeClient.FileChooserParams fileChooserParams) {
         mFilePathCallback = filePathCallback;
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*"); // 允许所有类型
-
-        // 可选：限制为你期望的类型
-        // String[] mimeTypes = {"application/json", "text/plain", "application/octet-stream"};
-        // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true); // ✅ 允许多选
 
         try {
             startActivityForResult(Intent.createChooser(intent, "选择文件"), FILE_CHOOSER_REQUEST_CODE);
@@ -100,6 +98,7 @@ webView.setWebChromeClient(new WebChromeClient() {
             return false;
         }
     }
+
 
 
     @Override
