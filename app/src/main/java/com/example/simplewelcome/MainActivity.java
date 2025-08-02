@@ -60,48 +60,45 @@ try {
 
         // 配置WebView
         webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean onShowFileChooser(
-                WebView webView, 
-                ValueCallback<Uri[]> filePathCallback,
-                WebChromeClient.FileChooserParams fileChooserParams) {
+    @Override
+    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        super.onReceivedError(view, errorCode, description, failingUrl);
 
-                // 保留 filePathCallback，用于后续返回用户选择的文件
-                mFilePathCallback = filePathCallback;
+        new android.app.AlertDialog.Builder(MainActivity.this)
+            .setTitle("加载失败")
+            .setMessage("无法加载页面：\n" + description)
+            .setPositiveButton("确定", null)
+            .show();
 
-                // 调用系统文件选择器（或自定义的文件选择器）
-                Intent intent = fileChooserParams.createIntent();
-                try {
-                    startActivityForResult(intent, FILE_CHOOSER_REQUEST_CODE);
-                } catch (ActivityNotFoundException e) {
-                    mFilePathCallback = null;
-                    return false;
-                }
-                return true;
-            }
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                super.onReceivedError(view, errorCode, description, failingUrl);
+        view.loadData("<h1>页面加载失败</h1><p>请检查服务器是否运行。</p>", "text/html", "UTF-8");
+    }
+});
 
-                new android.app.AlertDialog.Builder(MainActivity.this)
-                        .setTitle("加载失败")
-                        .setMessage("无法加载页面：\n" + description)
-                        .setPositiveButton("确定", null)
-                        .show();
+webView.setWebChromeClient(new WebChromeClient() {
+    @Override
+    public boolean onShowFileChooser(WebView webView,
+                                     ValueCallback<Uri[]> filePathCallback,
+                                     WebChromeClient.FileChooserParams fileChooserParams) {
+        mFilePathCallback = filePathCallback;
 
-                view.loadData("<h1>页面加载失败</h1><p>请检查服务器是否运行。</p>", "text/html", "UTF-8");
-            }
-        });
+        Intent intent = fileChooserParams.createIntent();
+        try {
+            startActivityForResult(intent, FILE_CHOOSER_REQUEST_CODE);
+        } catch (ActivityNotFoundException e) {
+            mFilePathCallback = null;
+            return false;
+        }
+        return true;
+    }
+});
 
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setAllowFileAccess(true);
-        settings.setAllowContentAccess(true);
-        webView.setWebChromeClient(new WebChromeClient());
-        // 加载本地网页
-        webView.loadUrl("http://127.0.0.1:8080/");
+WebSettings settings = webView.getSettings();
+settings.setJavaScriptEnabled(true);
+settings.setDomStorageEnabled(true);
+settings.setAllowFileAccess(true);
+settings.setAllowContentAccess(true);
 
+webView.loadUrl("http://127.0.0.1:8080/");
 
 overlay.setAlpha(0f); // 初始透明
 
