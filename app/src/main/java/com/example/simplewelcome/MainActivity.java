@@ -23,6 +23,9 @@ import android.widget.ImageView;
 import android.graphics.Color;
 import android.os.Handler;
 import android.webkit.WebChromeClient;
+import android.Manifest;
+import android.content.pm.PackageManager;
+
 
 
 public class MainActivity extends AppCompatActivity {
