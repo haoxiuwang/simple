@@ -37,9 +37,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "没有读取权限，正在请求权限", Toast.LENGTH_SHORT).show();
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
+            } else {
+                Toast.makeText(this, "已获得读取权限", Toast.LENGTH_SHORT).show();
+            }
         }
+
         server = new WebServer(this, 8080);
         try {
             server.start();
