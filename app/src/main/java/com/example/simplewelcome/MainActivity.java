@@ -40,36 +40,13 @@ public class MainActivity extends AppCompatActivity {
     private ValueCallback<Uri[]> mFilePathCallback;
     private static final int FILE_CHOOSER_REQUEST_CODE = 1001;
     
-    // private void checkStoragePermission() {
-    //     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-    //         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-    //                 != PackageManager.PERMISSION_GRANTED) {
-
-    //             if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-    //                 Toast.makeText(this, "应用需要访问存储来选择文件", Toast.LENGTH_SHORT).show();
-    //             } else {
-    //                 Toast.makeText(this, "应用没有读取权限，正在申请读取权限", Toast.LENGTH_SHORT).show();
-    //             }
-
-    //             ActivityCompat.requestPermissions(this,
-    //                     new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
-    //                     1001);
-    //         }
-    //     }
-    // }
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        //     if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-        //         Toast.makeText(this, "没有读取权限，正在请求权限", Toast.LENGTH_SHORT).show();
-        //         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
-        //     } else {
-        //         Toast.makeText(this, "已获得读取权限", Toast.LENGTH_SHORT).show();
-        //     }
-        // }
+        
 
         server = new WebServer(this, 8080);
         try {
@@ -112,8 +89,8 @@ webView.setWebChromeClient(new WebChromeClient() {
         intent.setType("*/*"); // 允许所有类型
 
         // 可选：限制为你期望的类型
-        String[] mimeTypes = {"application/json", "text/plain", "application/octet-stream"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        // String[] mimeTypes = {"application/json", "text/plain", "application/octet-stream"};
+        // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
 
         try {
             startActivityForResult(Intent.createChooser(intent, "选择文件"), FILE_CHOOSER_REQUEST_CODE);
