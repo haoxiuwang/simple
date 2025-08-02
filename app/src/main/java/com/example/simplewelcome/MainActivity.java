@@ -1,6 +1,11 @@
 
 package dev.simplesolution.one;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient.FileChooserParams;
+import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -53,6 +58,25 @@ try {
 
         // 配置WebView
         webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean onShowFileChooser(
+                WebView webView, 
+                ValueCallback<Uri[]> filePathCallback,
+                FileChooserParams fileChooserParams) {
+
+                // 保留 filePathCallback，用于后续返回用户选择的文件
+                mFilePathCallback = filePathCallback;
+
+                // 调用系统文件选择器（或自定义的文件选择器）
+                Intent intent = fileChooserParams.createIntent();
+                try {
+                    startActivityForResult(intent, FILE_CHOOSER_REQUEST_CODE);
+                } catch (ActivityNotFoundException e) {
+                    mFilePathCallback = null;
+                    return false;
+                }
+                return true;
+            }
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
@@ -112,6 +136,30 @@ overlay.animate()
         Toast.makeText(this, "WebView 初始化失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
     }
 }   
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
+        if (mFilePathCallback != null) {
+            Uri[] results = null;
+            // 如果操作成功并有返回数据
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    String dataString = data.getDataString();
+                    if (dataString != null) {
+                        results = new Uri[]{ Uri.parse(dataString) };
+                    }
+                }
+            }
+            mFilePathCallback.onReceiveValue(results);
+            mFilePathCallback = null;
+        }
+    } else {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+}
+
+
 @Override
 public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
