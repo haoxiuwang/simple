@@ -7,10 +7,11 @@
 </head>
 <body>
     <input multiple type="file" onchange="load(this)"/>
+    <audio controls id="audio" />
     <script>
         function load(self) {
             
-            alert(self.files.length)
+            document.querySelector("#audio").src = URL.createObjectURL(self.files[0])
         }
     </script>
 </body>
