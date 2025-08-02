@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input multiple type="file" onchange="load(this)"/>
+    <audio controls id="audio" />
+    <script>
+        function load(self) {
+            let i = 0,file;
+            while (true) {
+                file = self.files[i++]
+               
+                
+                if(file.name.endsWith(".webm")){
+               
+                    
+                    document.querySelector("#audio").src = URL.createObjectURL(file)
+                    return
+                }
+                if(!file)return
+            }
+            
+            
+        }
+    </script>
+</body>
+</html>
