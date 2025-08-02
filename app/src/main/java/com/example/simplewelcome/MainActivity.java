@@ -40,28 +40,28 @@ public class MainActivity extends AppCompatActivity {
     private ValueCallback<Uri[]> mFilePathCallback;
     private static final int FILE_CHOOSER_REQUEST_CODE = 1001;
     
-    private void checkStoragePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
+    // private void checkStoragePermission() {
+    //     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    //         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+    //                 != PackageManager.PERMISSION_GRANTED) {
 
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    Toast.makeText(this, "应用需要访问存储来选择文件", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "应用没有读取权限，正在申请读取权限", Toast.LENGTH_SHORT).show();
-                }
+    //             if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+    //                 Toast.makeText(this, "应用需要访问存储来选择文件", Toast.LENGTH_SHORT).show();
+    //             } else {
+    //                 Toast.makeText(this, "应用没有读取权限，正在申请读取权限", Toast.LENGTH_SHORT).show();
+    //             }
 
-                ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1001);
-            }
-        }
-    }
+    //             ActivityCompat.requestPermissions(this,
+    //                     new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+    //                     1001);
+    //         }
+    //     }
+    // }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkStoragePermission(); 
+        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "没有读取权限，正在请求权限", Toast.LENGTH_SHORT).show();
@@ -96,20 +96,7 @@ try {
         overlay = findViewById(R.id.overlay);
 
         // 配置WebView
-        webView.setWebViewClient(new WebViewClient() {
-    @Override
-    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        super.onReceivedError(view, errorCode, description, failingUrl);
-
-        new android.app.AlertDialog.Builder(MainActivity.this)
-            .setTitle("加载失败")
-            .setMessage("无法加载页面：\n" + description)
-            .setPositiveButton("确定", null)
-            .show();
-
-        view.loadData("<h1>页面加载失败</h1><p>请检查服务器是否运行。</p>", "text/html", "UTF-8");
-    }
-});
+       
 
 webView.setWebChromeClient(new WebChromeClient() {
     

@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="file" onchange="alert('file loaded!')"/>
+    <input multiple type="file" onchange="load(this)"/>
+    <script>
+        function load(self) {
+            
+            alert(self.files.length)
+        }
+    </script>
 </body>
 </html>
