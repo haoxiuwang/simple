@@ -28,7 +28,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+import android.webkit.JsResult;
+import android.app.AlertDialog;
+import android.content.Context;
 
 
 public class MainActivity extends AppCompatActivity {
