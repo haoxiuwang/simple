@@ -40,14 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private ValueCallback<Uri[]> mFilePathCallback;
     private static final int FILE_CHOOSER_REQUEST_CODE = 1001;
     
-    
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        
-
         server = new WebServer(this, 8080);
         try {
             server.start();
@@ -157,27 +152,6 @@ overlay.animate()
     }
 }   
 
-// @Override
-// protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//     if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
-//         if (mFilePathCallback != null) {
-//             Uri[] results = null;
-//             // 如果操作成功并有返回数据
-//             if (resultCode == Activity.RESULT_OK) {
-//                 if (data != null) {
-//                     String dataString = data.getDataString();
-//                     if (dataString != null) {
-//                         results = new Uri[]{ Uri.parse(dataString) };
-//                     }
-//                 }
-//             }
-//             mFilePathCallback.onReceiveValue(results);
-//             mFilePathCallback = null;
-//         }
-//     } else {
-//         super.onActivityResult(requestCode, resultCode, data);
-//     }
-// }
 
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
