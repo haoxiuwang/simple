@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             server.start();
         } catch (Exception e) {
             e.printStackTrace();
-            console.log("error");
+            // console.log("error");
         }
        
 
